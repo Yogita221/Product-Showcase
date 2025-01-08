@@ -2,11 +2,11 @@ import React from 'react'
 import Nav from './Nav'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
-import { productContext } from "../Utils/Context";
+import { ProductContext } from "../Utils/Context";
 
 const Home = () => {
 
-  const [products] = useContext(productContext);
+  const [products] = useContext(ProductContext);
   console.log(products);
   
 
