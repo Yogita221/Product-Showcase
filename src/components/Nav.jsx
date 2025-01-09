@@ -18,7 +18,7 @@ const Nav = () => {
                   ${(Math.random() * 225).toFixed()},
                   ${(Math.random() * 225).toFixed()}, 0.4)`;
     };
-    console.log(color());
+    // console.log(color());
 
 
   return (
