@@ -9,7 +9,9 @@ const Context = ({ children }) => {
   const getProducts = async () => {
     try {
       const { data } = await axios.get("https://fakestoreapi.com/products");
+      // const { data } = await axios("/products");
       setProducts(data);
+      
     } catch (error) {
       console.error("Error fetching products:", error);
     }
