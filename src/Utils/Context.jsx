@@ -16,6 +16,7 @@ const Context = ({ children }) => {
       console.error("Error fetching products:", error);
     }
   };
+  console.log(products);
 
   useEffect(() => {
     getProducts();
