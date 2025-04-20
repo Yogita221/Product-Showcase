@@ -1,34 +1,43 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import axios from '../Utils/axios'
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Loading from './Loading';
-
-
+import { ProductContext } from '../Utils/Context';
 
 const Details = () => {
+  const navigate = useNavigate();
   const [products, setproducts] = useContext(ProductContext);
   const [product, setproduct] = useState(null);
   const { id } = useParams();
   console.log(id);
+ 
+  
+  // const getsingleproduct = async () => {
+  //   try {
+  //     const {data} = await axios.get(`/products/${id}`)
+  //     // console.log(data);
+  //     setproduct(data);
 
   
-  const getsingleproduct = async () => {
-    try {
-      const {data} = await axios.get(`/products/${id}`)
-      // console.log(data);
-      setproduct(data);
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
-    getsingleproduct();
+    if(!product){
+      setproduct(products.filter((p) => p.id == id)[0]);
+    }
+    // getsingleproduct();
 
   }, [])
   
-  
+  const ProductDeleteHandler = (id) => {
+    const FilteredProducts = products.filter((p) => p.id !== id);
+    setproducts(FilteredProducts);
+    localStorage.setItem("products", JSON.stringify(FilteredProducts));
+    navigate("/")
+
+  };
 
 
 
@@ -57,14 +66,16 @@ const Details = () => {
             {product.description}
           </p>
           <Link  
+          to={`/edit/${product.id}`}
           className='mr-5 py-3 px-6 border rounded border-blue-200 text-blue-400'>
           Edit
           </Link>
 
-          <Link  
+          <button
+          onClick={() => ProductDeleteHandler(product.id)} 
           className='py-3 px-6 border rounded border-red-200 text-red-400'>
           Delete
-          </Link>
+          </button>
 
 
         </div>

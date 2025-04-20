@@ -1,25 +1,28 @@
+
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 
 export const ProductContext = createContext();
 
 const Context = ({ children }) => {
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState(
+    JSON.parse(localStorage.getItem("products")) || []
+  );
 
   const getProducts = async () => {
     try {
       const { data } = await axios.get("https://fakestoreapi.com/products");
-      // const { data } = await axios("/products");
       setProducts(data);
-      
+      localStorage.setItem("products", JSON.stringify(data));
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
-  console.log(products);
 
   useEffect(() => {
-    getProducts();
+    if (!localStorage.getItem("products")) {
+      getProducts();
+    }
   }, []);
 
   return (

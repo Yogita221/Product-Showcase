@@ -7,10 +7,16 @@ import { Link } from 'react-router-dom';
 const Nav = () => {
     const [products] = useContext(ProductContext);
 
-    let distinct_category =
-    products && products.reduce((acc, cv) => [...acc, cv.category], []);
-    distinct_category = [...new Set(distinct_category)];
-    console.log(distinct_category);
+    // let distinct_category =
+    // products && products.reduce((acc, cv) => [...acc, cv.category], []);
+    // distinct_category = [...new Set(distinct_category)];
+    // console.log(distinct_category);
+
+    let distinct_category = Array.isArray(products)
+  ? products.reduce((acc, cv) => [...acc, cv.category], [])
+  : [];
+
+distinct_category = [...new Set(distinct_category)];
 
 
     const color = () => {
@@ -18,7 +24,7 @@ const Nav = () => {
                   ${(Math.random() * 225).toFixed()},
                   ${(Math.random() * 225).toFixed()}, 0.4)`;
     };
-    // console.log(color());
+   
 
 
   return (
