@@ -11,25 +11,21 @@ const Details = () => {
   console.log(id);
  
   
-  // const getsingleproduct = async () => {
-  //   try {
-  //     const {data} = await axios.get(`/products/${id}`)
-  //     // console.log(data);
-  //     setproduct(data);
 
-  
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
-  useEffect(() => {
-    if(!product){
+   useEffect(() => {
+     if(!product){
       setproduct(products.filter((p) => p.id == id)[0]);
     }
     // getsingleproduct();
 
-  }, [])
+   }, [])
+
+//   useEffect(() => {
+//   const foundProduct = products.find((p) => p.id == id);
+//   setproduct(foundProduct);
+// }, [products, id]);
+
   
   const ProductDeleteHandler = (id) => {
     const FilteredProducts = products.filter((p) => p.id !== id);
@@ -40,14 +36,19 @@ const Details = () => {
   };
 
 
+console.log("PRODUCT OBJECT = ", product);
+
 
   return ( product ?
     <div className='w-[70%] h-full m-auto p-[10%] flex justify-between items-center'>
 
-        <img className='object-contain h-[80%] w-[40%]'
+         <img className='object-contain h-[80%] w-[40%]'
         src={`${product.image}`}
-        alt=""
-         />
+        alt={product.title}
+         /> 
+
+
+
         <div className='content  w-[50%] '>
 
           <h1 className='text-3xl'>
