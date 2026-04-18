@@ -32,12 +32,18 @@ const Home = () => {
               to={`/details/${p.id}`}
               className="card p-3 border shadow rounded w-[18%] h-[30vh] flex-col flex justify-center items-center"
             >
-              <div
+              {/* <div
                 className="hover:scale-110 mb-3 w-full h-[80%] bg-contain bg-no-repeat bg-center"
                 style={{
                   backgroundImage: `url(${p.image})`,
                 }}
-              ></div>
+              ></div> */}
+
+              <img
+  src={p.image}
+  alt={p.title}
+  className="hover:scale-110 mb-3 w-full h-[80%] object-contain"
+/>
               <h1 className="hover:text-blue-400">{p.title}</h1>
             </Link>
           ))
